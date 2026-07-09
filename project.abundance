@@ -36,8 +36,8 @@
         }
       ],
       "interpreterVersion": 1,
-      "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\")\n    return leaf\n  })\n}",
-      "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\");\n        return leaf;\n    });\n}\n"
+      "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      leaf.geometry = leaf.geometry.mirror([1, 0], [0, 0], \"plane\")\n    } else {\n      leaf.geometry = leaf.geometry.mirror(\"XZ\")\n    }\n    return leaf\n  })\n}",
+      "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            leaf.geometry = leaf.geometry.mirror([1, 0], [0, 0], \"plane\");\n        }\n        else {\n            leaf.geometry = leaf.geometry.mirror(\"XZ\");\n        }\n        return leaf;\n    });\n}\n"
     },
     {
       "atomType": "Input",
@@ -45,77 +45,6 @@
       "y": 0.1725,
       "uniqueID": "id-21914",
       "name": "assembly"
-    },
-    {
-      "atomType": "Rectangle",
-      "x": 0.17809021675454015,
-      "y": 0.6024999999999999,
-      "uniqueID": "id-21918",
-      "ioValues": [
-        {
-          "name": "x length",
-          "ioValue": 10
-        },
-        {
-          "name": "y length",
-          "ioValue": 10
-        }
-      ]
-    },
-    {
-      "atomType": "Move",
-      "x": 0.24897480960749852,
-      "y": 0.4375,
-      "uniqueID": "id-21922",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "xDist",
-          "ioValue": 0
-        },
-        {
-          "name": "yDist",
-          "ioValue": 10
-        },
-        {
-          "name": "zDist",
-          "ioValue": 0
-        }
-      ]
-    },
-    {
-      "atomType": "Code",
-      "x": 0.49794961921499703,
-      "y": 0.7300000000000001,
-      "uniqueID": "id-21928",
-      "ioValues": [
-        {
-          "name": "assembly",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "interpreterVersion": 1,
-      "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\")\n    return leaf\n  })\n}",
-      "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\");\n        return leaf;\n    });\n}\n"
-    },
-    {
-      "atomType": "Extrude",
-      "x": 0.29759812536613944,
-      "y": 0.2475,
-      "uniqueID": "id-21941",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "height",
-          "ioValue": 10
-        }
-      ]
     }
   ],
   "allConnectors": [
@@ -125,23 +54,8 @@
       "ap2ID": "id-21903"
     },
     {
-      "ap2Name": "geometry",
-      "ap1ID": "id-21918",
-      "ap2ID": "id-21922"
-    },
-    {
       "ap2Name": "assembly",
-      "ap1ID": "id-21922",
-      "ap2ID": "id-21928"
-    },
-    {
-      "ap2Name": "geometry",
-      "ap1ID": "id-21922",
-      "ap2ID": "id-21941"
-    },
-    {
-      "ap2Name": "assembly",
-      "ap1ID": "id-21922",
+      "ap1ID": "id-21914",
       "ap2ID": "id-21905"
     }
   ],
